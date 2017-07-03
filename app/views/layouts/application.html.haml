@@ -6,7 +6,45 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    %p.notice= notice
-    %p.alert= alert
+    %body
+      %div{class: "bootstrap-scope"}
+        %nav.navbar.navbar-fixed-top
+          .container-fluid
+            .navbar-header
+              .navbar-brand= link_to image_tag("logo-YS.png", :border => 0), root_path
+            %div
+              %ul.nav.navbar-nav
+                .col-lg-6.navbar-left
+                  .input-group{class: "search-box"}
+                  = form_tag posts_path, :method => :get do
+                    .left-inner-addon
+                      %i.fa.fa-search.fa-fw
+                      -if (params[:search].nil? || params[:search].empty? || params[:search] =~ /^\s*$/)
+                        %input.form-control{:placeholder => "Search Yateley School...", :tabindex => "1", :type => "text", :name => "search", :autocomplete => "off"}
+                      -else
+                        %input.form-control{:value => params[:search], :tabindex => "1", :type => "text", :name => "search", :autocomplete => "off"}
+
+              -if user_signed_in?
+                %ul.nav.navbar-nav.navbar-right.tabs
+                  = link_to posts_path do
+                    .fa.fa-home.fa-2x{:alt => "Home"}
+                  .fa.fa-map-o.fa-2x
+                  .fa.fa-comments-o.fa-2x
+                  .fa.fa-user.fa-2x
+                  = link_to new_post_path do
+                    .fa.fa-pencil-square.fa-2x
+
+              -else
+                %ul.nav.navbar-nav.navbar-right
+                  %li= link_to "Sign Up", new_user_registration_path
+                  %li= link_to "Sign In", new_user_session_path
+
+  %div{class: "b4w-overlay", id: "b4w-overlay"}
+
+  %div{class: "bootstrap-scope"}
+    .container
+
+    - flash.each do |name, msg|
+      = content_tag :div, msg, class: "alert alert-info"
+
     = yield
