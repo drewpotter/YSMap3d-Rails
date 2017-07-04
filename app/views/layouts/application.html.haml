@@ -12,17 +12,16 @@
           .container-fluid
             .navbar-header
               .navbar-brand= link_to image_tag("logo-YS.png", :border => 0), root_path
-            %div
-              %ul.nav.navbar-nav
-                .col-lg-6.navbar-left
-                  .input-group{class: "search-box"}
-                  = form_tag posts_path, :method => :get do
-                    .left-inner-addon
-                      %i.fa.fa-search.fa-fw
-                      -if (params[:search].nil? || params[:search].empty? || params[:search] =~ /^\s*$/)
-                        %input.form-control{:placeholder => "Search Yateley School...", :tabindex => "1", :type => "text", :name => "search", :autocomplete => "off"}
-                      -else
-                        %input.form-control{:value => params[:search], :tabindex => "1", :type => "text", :name => "search", :autocomplete => "off"}
+            %ul.nav.navbar-nav
+              .col-lg-6.navbar-left
+                .input-group{class: "search-box"}
+                = form_tag posts_path, :method => :get do
+                  .left-inner-addon
+                    %i.fa.fa-search.fa-fw
+                    -if (params[:search].nil? || params[:search].empty? || params[:search] =~ /^\s*$/)
+                      %input.form-control{:placeholder => "Search Yateley School...", :tabindex => "1", :type => "text", :name => "search", :autocomplete => "off"}
+                    -else
+                      %input.form-control{:value => params[:search], :tabindex => "1", :type => "text", :name => "search", :autocomplete => "off"}
 
               -if user_signed_in?
                 %ul.nav.navbar-nav.navbar-right.tabs

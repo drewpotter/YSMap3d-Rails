@@ -10,7 +10,7 @@ $ ->
     w = $(window).width()
     h = $(window).height()
     console.log("resizing container")
-    m_container.resize(w, h)
+    m_container.resize_to_container();
     console.log($(window).width())
     if $(window).width() > 828
       console.log("one row")
@@ -23,13 +23,13 @@ jQuery(document).ready ($) ->
 
   m_app.init({
     canvas_container_id: "b4w-overlay",
-    callback: load_cb
+    callback: init_cb
 })
 
-load_cb = ->
-  m_data.load("/all-floors.json", loaded_cb)
+init_cb = ->
+  m_data.load("/all-floors.json", load_cb)
 
-loaded_cb = ->
+load_cb = ->
   m_app.enable_camera_controls()
 
 window.oncontextmenu = (e) ->
