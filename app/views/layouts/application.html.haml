@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
     %title Yateley School Map 3d
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -26,10 +26,9 @@
 
               -if user_signed_in?
                 %ul.nav.navbar-nav.navbar-right.tabs
-                  = link_to posts_path do
-                    .fa.fa-home.fa-2x{:alt => "Home"}
-                  .fa.fa-map-o.fa-2x
-                  .fa.fa-comments-o.fa-2x
+                  .fa.fa-heart.fa-2x
+                  .fa.fa-send-o.fa-2x
+                  .fa.fa-copyright.fa-2x
                   .fa.fa-user.fa-2x
                   = link_to new_post_path do
                     .fa.fa-pencil-square.fa-2x
@@ -44,7 +43,7 @@
   %div{class: "bootstrap-scope"}
     .container
 
-    - flash.each do |name, msg|
-      = content_tag :div, msg, class: "alert alert-info"
+      - flash.each do |name, msg|
+        = content_tag :div, msg, class: "alert alert-info"
 
-    = yield
+      = yield
