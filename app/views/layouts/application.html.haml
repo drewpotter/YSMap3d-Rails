@@ -33,11 +33,21 @@
                     .fa.fa-pencil-square.fa-2x
                   = link_to new_post_path do
                     .fa.fa-calendar.fa-2x
+                  = link_to destroy_user_session_path, method: :delete do
+                    .fa.fa-sign-out.fa-2x
 
               -else
-                %ul.nav.navbar-nav.navbar-right
-                  %li= link_to "Sign Up", new_user_registration_path
-                  %li= link_to "Sign In", new_user_session_path
+                %ul.nav.navbar-nav.navbar-right.tabs
+                  .fa.fa-heart.fa-2x
+                  .fa.fa-send-o.fa-2x
+                  .fa.fa-copyright.fa-2x
+                  .fa.fa-user.fa-2x
+                  = link_to new_post_path do
+                    .fa.fa-pencil-square.fa-2x
+                  = link_to new_post_path do
+                    .fa.fa-calendar.fa-2x
+                  = link_to new_user_session_path do
+                    .fa.fa-sign-in.fa-2x
 
   %div{class: "b4w-overlay", id: "b4w-overlay"}
 
