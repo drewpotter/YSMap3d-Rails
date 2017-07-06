@@ -10,3 +10,4 @@ Planned features include:
 - Possibly audio narrated tour with possible videos
 
 Coded by Andrew Potter. 3d modelling and photography by Andrew Potter.
+Joystick designed by Lewis Smith.
