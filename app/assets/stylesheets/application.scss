@@ -153,21 +153,23 @@ body {
 }
 
 div#control_rotate_circle {
-    position: absolute;
-    background-image: url(interface/joystick.png);
-    width: 156px;
-    height: 156px;
-    bottom: 20px;
-    left: 20px;
-    z-index: 100;
+  position: absolute;
+  background-image: url(interface/joystick.png);
+  width: 156px;
+  height: 156px;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+  opacity: 0.5;
 }
 
 div#control_pan_circle {
-    position: absolute;
-    background-image: url(interface/joystick.png);
-    width: 156px;
-    height: 156px;
-    bottom: 20px;
-    right: 20px;
-    z-index: 100;
+  position: absolute;
+  background-image: url(interface/joystick.png);
+  width: 156px;
+  height: 156px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  opacity: 0.5;
 }
