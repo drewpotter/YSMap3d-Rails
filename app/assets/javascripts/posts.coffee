@@ -1,16 +1,16 @@
 console.log("init Blend4Web")
-m_app = b4w.require("app");
-m_data = b4w.require("data");
-m_container = b4w.require("container");
-m_anchors = b4w.require("anchors");
-m_main  = b4w.require("main");
+m_app = b4w.require("app")
+m_data = b4w.require("data")
+m_container = b4w.require("container")
+m_anchors = b4w.require("anchors")
+m_main = b4w.require("main")
 
 $ ->
   $(window).resize ->
     w = $(window).width()
     h = $(window).height()
     console.log("resizing container")
-    m_container.resize_to_container();
+    m_container.resize_to_container()
     console.log($(window).width())
     if $(window).width() > 828
       console.log("one row")
