@@ -1,17 +1,19 @@
 console.log("init Blend4Web")
 m_app = b4w.require("app")
 m_data = b4w.require("data")
-m_container = b4w.require("container")
+m_cont = b4w.require("container")
 m_anchors = b4w.require("anchors")
 m_main = b4w.require("main")
 m_ctl = b4w.require("controls")
+
+vec2_tmp = new Float32Array(2)
 
 $ ->
   $(window).resize ->
     w = $(window).width()
     h = $(window).height()
     console.log("resizing container")
-    m_container.resize_to_container()
+    m_cont.resize_to_container()
     console.log($(window).width())
     if $(window).width() > 828
       console.log("one row")
@@ -53,9 +55,19 @@ touch_start_cb = (event) ->
   i = 0
   while i < touches.length
     touch = touches[i]
-    x = touch.clientX
-    y = touch.clientY
+    client_x = touch.clientX
+    client_y = touch.clientY
+    console.log("touch event client, x: " + client_x.toString() + " y: " + client_y.toString())
+    canvas_xy = m_cont.client_to_canvas_coords(client_x, client_y, vec2_tmp)
+    x = canvas_xy[0]
+    y = canvas_xy[1]
     console.log("touch event, x: " + x.toString() + " y: " + y.toString())
+
+    if(x > w / 2)
+      console.log("right hand side")
+    else
+      console.log("left hand side")
+
     i++
   return
 
