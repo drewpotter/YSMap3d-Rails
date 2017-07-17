@@ -9,8 +9,12 @@ m_ctl = b4w.require("controls")
 vec2_tmp = new Float32Array(2)
 control_rotate_circle = undefined
 control_pan_circle = undefined
+control_pan_analog_stick = undefined
+control_rotate_analog_stick = undefined
 control_rotate_circle_offset = undefined
+control_rotate_analog_stick_offset = undefined
 control_pan_circle_offset = undefined
+control_pan_analog_stick_offset = undefined
 
 $ ->
   $(window).resize ->
@@ -45,8 +49,12 @@ init_cb = ->
   pan_down_arrow = m_ctl.create_custom_sensor(0)
   control_rotate_circle = document.getElementById("control_rotate_circle")
   control_pan_circle = document.getElementById("control_pan_circle")
+  control_pan_analog_stick = document.getElementById("control_pan_analog_stick")
+  control_rotate_analog_stick = document.getElementById("control_rotate_analog_stick")
   control_rotate_circle_offset = control_rotate_circle.clientWidth / 2
   control_pan_circle_offset = control_pan_circle.clientWidth / 2
+  control_pan_analog_stick_offset = control_pan_analog_stick.clientWidth / 2
+  control_rotate_analog_stick_offset = control_rotate_analog_stick.clientWidth / 2
 
   document.getElementById("b4w-overlay").addEventListener("touchstart", touch_start_cb, false)
   document.getElementById("b4w-overlay").addEventListener("touchmove", touch_move_cb, false)
@@ -76,11 +84,19 @@ touch_start_cb = (event) ->
       console.log("right hand side")
       control_rotate_circle.style.left = x - control_rotate_circle_offset + "px"
       control_rotate_circle.style.top = y - control_rotate_circle_offset + "px"
+      control_rotate_analog_stick.style.left = x - control_rotate_analog_stick_offset + "px"
+      control_rotate_analog_stick.style.top = y - control_rotate_analog_stick_offset + "px"
+      control_rotate_circle.style.visibility = "visible"
+      control_rotate_analog_stick.style.visibility = "visible"
 
     else
       console.log("left hand side")
       control_pan_circle.style.left = x - control_pan_circle_offset + "px"
       control_pan_circle.style.top = y - control_pan_circle_offset + "px"
+      control_pan_analog_stick.style.left = x - control_pan_analog_stick_offset + "px"
+      control_pan_analog_stick.style.top = y - control_pan_analog_stick_offset + "px"
+      control_pan_circle.style.visibility = "visible"
+      control_pan_analog_stick.style.visibility = "visible"
 
     i++
   return

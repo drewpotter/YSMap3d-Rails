@@ -158,9 +158,10 @@ div#control_rotate_circle {
   width: 156px;
   height: 156px;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
   z-index: 100;
   opacity: 0.5;
+  visibility: hidden;
 }
 
 div#control_pan_circle {
@@ -169,7 +170,26 @@ div#control_pan_circle {
   width: 156px;
   height: 156px;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
   z-index: 100;
   opacity: 0.5;
+  visibility: hidden;
+}
+
+div#control_pan_analog_stick {
+  position: absolute;
+  background-image: url(interface/analog-stick.png);
+  width: 44px;
+  height: 44px;
+  z-index: 150;
+  visibility: hidden;
+}
+
+div#control_rotate_analog_stick {
+  position: absolute;
+  background-image: url(interface/analog-stick.png);
+  width: 44px;
+  height: 44px;
+  z-index: 150;
+  visibility: hidden;
 }
