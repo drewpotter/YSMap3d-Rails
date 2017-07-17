@@ -107,6 +107,11 @@ touch_move_cb = (event) ->
 
 touch_end_cb = (event) ->
   console.log("touch end event")
+  control_rotate_circle.style.visibility = "hidden"
+  control_rotate_analog_stick.style.visibility = "hidden"
+  control_pan_circle.style.visibility = "hidden"
+  control_pan_analog_stick.style.visibility = "hidden"
+
   return
 
 window.oncontextmenu = (e) ->
