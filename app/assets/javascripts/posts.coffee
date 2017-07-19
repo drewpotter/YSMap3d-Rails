@@ -35,7 +35,7 @@ jQuery(document).ready ($) ->
   m_app.init({
     canvas_container_id: "b4w-overlay",
     callback: init_cb
-})
+  })
 
 init_cb = ->
   m_data.load("/all-floors.json", load_cb)
