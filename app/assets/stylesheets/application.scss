@@ -208,6 +208,9 @@ div#floor_label {
   font-family: sans-serif;
   color: #fff;
   vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 div#up_button {

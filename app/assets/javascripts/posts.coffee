@@ -5,7 +5,11 @@ m_cont = b4w.require("container")
 m_anchors = b4w.require("anchors")
 m_main = b4w.require("main")
 m_ctl = b4w.require("controls")
+m_scenes = b4w.require("scenes")
+m_cam = b4w.require("camera")
 
+current_floor = -1
+camera = undefined
 vec2_tmp = new Float32Array(2)
 control_rotate_circle = undefined
 control_pan_circle = undefined
@@ -30,12 +34,106 @@ $ ->
     else if $(window).width() < 768
       console.log("three rows")
 
+  $('#up_button').click ->
+    console.log("up_button")
+    change_floor(1)
+
+  $('#down_button').click ->
+    console.log("down_button")
+    change_floor(-1)
+
+  $('#zoom_in_button').click ->
+    console.log("zoom_in_button")
+    console.log("zoom_in_button")
+
+  $('#zoom_out_button').click ->
+    console.log("zoom_out_button")
+
 jQuery(document).ready ($) ->
 
   m_app.init({
     canvas_container_id: "b4w-overlay",
     callback: init_cb
   })
+
+change_floor = (direction) ->
+  console.log("Current floor: "  + current_floor.toString())
+  if direction == 1
+    console.log("Move up")
+    if current_floor < 2
+      current_floor++
+  else if direction == -1
+    console.log("Move down")
+    if current_floor > -1
+      current_floor--
+  console.log("Resultant floor: "  + current_floor.toString())
+  show_floor(current_floor)
+
+show_floor = (current_floor) ->
+  switch current_floor
+    when -1
+      console.log("Render all floors")
+      $('#floor_label').replaceWith '<div id="floor_label"><b>ALL</b></div>'
+      obj = m_scenes.get_object_by_name("Walls.Second.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.Second.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Walls.First.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.First.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Walls.Ground.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.Ground.Floor");
+      m_scenes.show_object(obj);
+    when 0
+      console.log("Render GND floor")
+      $('#floor_label').replaceWith '<div id="floor_label"><b>GND</b></div>'
+      obj = m_scenes.get_object_by_name("Walls.Second.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.Second.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Walls.First.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.First.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Walls.Ground.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.Ground.Floor");
+      m_scenes.show_object(obj);
+    when 1
+      console.log("Render 1ST floor")
+      $('#floor_label').replaceWith '<div id="floor_label"><b>1ST</b></div>'
+      obj = m_scenes.get_object_by_name("Walls.Second.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.Second.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Walls.First.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.First.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Walls.Ground.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.Ground.Floor");
+      m_scenes.hide_object(obj);
+    when 2
+      console.log("Render 2ND floor")
+      $('#floor_label').replaceWith '<div id="floor_label"><b>2ND</b></div>'
+      obj = m_scenes.get_object_by_name("Walls.Second.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.Second.Floor");
+      m_scenes.show_object(obj);
+      obj = m_scenes.get_object_by_name("Walls.First.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.First.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Walls.Ground.Floor");
+      m_scenes.hide_object(obj);
+      obj = m_scenes.get_object_by_name("Annotations.Ground.Floor");
+      m_scenes.hide_object(obj);
+    else
+      console.log("Render unknown floor")
+
 
 init_cb = ->
   m_data.load("/all-floors.json", load_cb)
@@ -62,6 +160,7 @@ init_cb = ->
 
 load_cb = ->
   m_app.enable_camera_controls()
+  camera = m_scenes.get_active_camera();
 
 touch_start_cb = (event) ->
   console.log("touch start event")
