@@ -7,6 +7,7 @@ m_main = b4w.require("main")
 m_ctl = b4w.require("controls")
 m_scenes = b4w.require("scenes")
 m_cam = b4w.require("camera")
+m_vec3 = b4w.require("vec3")
 
 current_floor = -1
 camera = undefined
@@ -19,6 +20,7 @@ control_rotate_circle_offset = undefined
 control_rotate_analog_stick_offset = undefined
 control_pan_circle_offset = undefined
 control_pan_analog_stick_offset = undefined
+pivot_distance = undefined
 
 $ ->
   $(window).resize ->
@@ -44,10 +46,13 @@ $ ->
 
   $('#zoom_in_button').click ->
     console.log("zoom_in_button")
-    console.log("zoom_in_button")
+    pivot_distance-= 1.0
+    m_cam.target_set_distance(m_scenes.get_active_camera(), pivot_distance)
 
   $('#zoom_out_button').click ->
     console.log("zoom_out_button")
+    pivot_distance+= 1.0
+    m_cam.target_set_distance(m_scenes.get_active_camera(), pivot_distance)
 
 jQuery(document).ready ($) ->
 
@@ -161,9 +166,13 @@ init_cb = ->
 load_cb = ->
   m_app.enable_camera_controls()
   camera = m_scenes.get_active_camera();
+  pivot_distance = m_cam.target_get_distance(camera)
 
 touch_start_cb = (event) ->
   console.log("touch start event")
+  ###
+  This function is largely based on the Blend4Web demo code provided under the AGPLv3
+  ###
   event.preventDefault()
   h = window.innerHeight
   w = window.innerWidth
@@ -210,7 +219,6 @@ touch_end_cb = (event) ->
   control_rotate_analog_stick.style.visibility = "hidden"
   control_pan_circle.style.visibility = "hidden"
   control_pan_analog_stick.style.visibility = "hidden"
-
   return
 
 window.oncontextmenu = (e) ->
