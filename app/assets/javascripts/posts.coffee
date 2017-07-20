@@ -46,11 +46,13 @@ $ ->
 
   $('#zoom_in_button').click ->
     console.log("zoom_in_button")
+    pivot_distance = m_cam.target_get_distance(camera)
     pivot_distance-= 1.0
     m_cam.target_set_distance(m_scenes.get_active_camera(), pivot_distance)
 
   $('#zoom_out_button').click ->
     console.log("zoom_out_button")
+    pivot_distance = m_cam.target_get_distance(camera)
     pivot_distance+= 1.0
     m_cam.target_set_distance(m_scenes.get_active_camera(), pivot_distance)
 
