@@ -169,6 +169,11 @@ load_cb = ->
   m_app.enable_camera_controls()
   camera = m_scenes.get_active_camera();
   pivot_distance = m_cam.target_get_distance(camera)
+  console.log("Platform name: " + platform.name)
+  if(platform.name=="Microsoft Edge" || platform.name=="IE")
+    console.log("Microsoft browser detected")
+  else
+    console.log("non-Microsoft browser detected")
 
 touch_start_cb = (event) ->
   console.log("touch start event")
