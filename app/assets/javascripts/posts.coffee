@@ -181,7 +181,6 @@ show_floor = (current_floor) ->
     else
       console.log("Render unknown floor")
 
-
 init_cb = ->
   m_data.load("/all-floors.json", load_cb)
   rotate_right_arrow = m_ctl.create_custom_sensor(0)
