@@ -21,6 +21,7 @@ control_rotate_analog_stick_offset = undefined
 control_pan_circle_offset = undefined
 control_pan_analog_stick_offset = undefined
 pivot_distance = undefined
+lastSearchBoxValue = ''
 
 $ ->
   $(window).resize ->
@@ -35,6 +36,12 @@ $ ->
       console.log("two rows")
     else if $(window).width() < 768
       console.log("three rows")
+
+  $('#search-box-field').on 'change keyup paste mouseup', ->
+    if $(this).val() != lastSearchBoxValue
+      lastSearchBoxValue = $(this).val()
+      console.log 'The text box changed'
+    return
 
   $('#up_button').click ->
     console.log("up_button")
