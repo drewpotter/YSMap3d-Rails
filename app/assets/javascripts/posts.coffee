@@ -98,9 +98,10 @@ jQuery(document).ready ($) ->
 
 search = (text) ->
   console.log("search for: " + text)
-  console.log(index.search text, fields:
+  results = index.search text, fields:
     title: boost: 2
-    body: boost: 1)
+    body: boost: 1
+  console.log(results)
 
 change_floor = (direction) ->
   console.log("Current floor: "  + current_floor.toString())
