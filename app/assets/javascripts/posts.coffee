@@ -37,10 +37,15 @@ $ ->
     else if $(window).width() < 768
       console.log("three rows")
 
-  $('#search-box-field').on 'change keyup paste mouseup', ->
+  $('#search-box-field').on 'change keyup keydown paste mouseup', (event) ->
+    key = event.keyCode or event.which
+    if key == 13
+      event.preventDefault()
+      return
     if $(this).val() != lastSearchBoxValue
       lastSearchBoxValue = $(this).val()
       console.log 'The text box changed'
+      search(lastSearchBoxValue)
     return
 
   $('#up_button').click ->
@@ -69,6 +74,9 @@ jQuery(document).ready ($) ->
     canvas_container_id: "b4w-overlay",
     callback: init_cb
   })
+
+search = (text) ->
+  console.log("search for: " + text)
 
 change_floor = (direction) ->
   console.log("Current floor: "  + current_floor.toString())
@@ -173,7 +181,7 @@ init_cb = ->
   document.getElementById("b4w-overlay").addEventListener("touchend", touch_end_cb, false)
 
 load_cb = ->
-  m_app.enable_camera_controls()
+  m_app.enable_camera_controls(false, true)
   camera = m_scenes.get_active_camera();
   pivot_distance = m_cam.target_get_distance(camera)
   console.log("Platform name: " + platform.name)
