@@ -86,10 +86,13 @@ jQuery(document).ready ($) ->
   'id': 1
   'title': 'A16'
   'body': 'Computer room.'
+  'annotation': 'Annotation.A.A16'
   doc2 =
   'id': 2
   'title': 'IT Support'
   'body': 'For all ICT support related queries.'
+  'annotation': 'Annotation.A.IT.Support'
+
   index.addDoc doc1
   index.addDoc doc2
 
