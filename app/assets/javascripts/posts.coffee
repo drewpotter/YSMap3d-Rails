@@ -9,6 +9,7 @@ m_scenes = b4w.require("scenes")
 m_cam = b4w.require("camera")
 m_vec3 = b4w.require("vec3")
 
+index = undefined
 current_floor = -1
 camera = undefined
 vec2_tmp = new Float32Array(2)
@@ -75,8 +76,28 @@ jQuery(document).ready ($) ->
     callback: init_cb
   })
 
+  index = elasticlunr ->
+    @addField 'title'
+    @addField 'body'
+    @setRef 'id'
+    return
+
+  doc1 =
+  'id': 1
+  'title': 'A16'
+  'body': 'Computer room.'
+  doc2 =
+  'id': 2
+  'title': 'IT Support'
+  'body': 'For all ICT support related queries.'
+  index.addDoc doc1
+  index.addDoc doc2
+
 search = (text) ->
   console.log("search for: " + text)
+  console.log(index.search text, fields:
+    title: boost: 2
+    body: boost: 1)
 
 change_floor = (direction) ->
   console.log("Current floor: "  + current_floor.toString())
