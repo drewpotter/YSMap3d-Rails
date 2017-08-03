@@ -79,6 +79,7 @@ jQuery(document).ready ($) ->
   index = elasticlunr ->
     @addField 'title'
     @addField 'body'
+    @addField 'tags'
     @setRef 'id'
     return
 
@@ -86,25 +87,36 @@ jQuery(document).ready ($) ->
   'id': 1
   'title': 'A16'
   'body': 'ICT Computer room.'
+  'tags' : 'IT ICT'
   'annotation': 'Annotation.A.A16'
   doc2 =
   'id': 2
   'title': 'IT Support'
   'body': 'ICT Support for all ICT support related queries.'
+  'tags' : 'IT support'
   'annotation': 'Annotation.A.IT.Support'
   doc3 =
   'id': 3
   'title': 'A15'
   'body': 'Sociology classroom'
+  'tag': 'sociology'
   'annotation': 'Annotation.A.A15'
+  doc4 =
+  'id': 4
+  'title': 'A14'
+  'body': 'Religious Studies classroom'
+  'tags': 'RE RS religion religious'
+  'annotation': 'Annotation.A.A14'
 
   index.addDoc doc1
   index.addDoc doc2
   index.addDoc doc3
+  index.addDoc doc4
 
 search = (text) ->
   console.log("search for: " + text)
   results = index.search text, fields:
+    tags: boost: 3
     title: boost: 2
     body: boost: 1
   console.log(results)
@@ -118,6 +130,7 @@ search = (text) ->
   for result in results
     output += '<b>' + result.doc.title + '</b>' + '<br/>'
     output += result.doc.body + '<br/>'
+    output += 'tags: ' + result.doc.tags + '<br/>'
     output += result.doc.annotation + '<br/>'
     output += '<br/>'
 
