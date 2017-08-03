@@ -87,7 +87,7 @@ jQuery(document).ready ($) ->
   'id': 1
   'title': 'A16'
   'body': 'ICT Computer room.'
-  'tags' : 'IT ICT'
+  'tags' : 'ICT'
   'annotation': 'Annotation.A.A16'
   doc2 =
   'id': 2
@@ -105,7 +105,7 @@ jQuery(document).ready ($) ->
   'id': 4
   'title': 'A14'
   'body': 'Religious Studies classroom'
-  'tags': 'RE RS religion religious'
+  'tags': 'RS religion religious'
   'annotation': 'Annotation.A.A14'
 
   index.addDoc doc1
