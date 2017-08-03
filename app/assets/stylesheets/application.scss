@@ -201,6 +201,20 @@ div#side_buttons {
   bottom: 0px;
 }
 
+div#context_sensitive_overlay {
+  position: absolute;
+  z-index: 150;
+  background: rgba(56, 86, 110, 0.5);
+  padding-left: 22px;
+  padding-right: 22px;
+  padding-bottom: 11px;
+  bottom: 0px;
+  right: 0px;
+  top: 105px;
+  width: 310px;
+  color: #fff;
+}
+
 div#floor_label {
   padding-top: 7px;
   text-align: center;

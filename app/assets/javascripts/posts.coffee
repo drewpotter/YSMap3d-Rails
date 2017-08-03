@@ -85,16 +85,22 @@ jQuery(document).ready ($) ->
   doc1 =
   'id': 1
   'title': 'A16'
-  'body': 'Computer room.'
+  'body': 'ICT Computer room.'
   'annotation': 'Annotation.A.A16'
   doc2 =
   'id': 2
   'title': 'IT Support'
-  'body': 'For all ICT support related queries.'
+  'body': 'ICT Support for all ICT support related queries.'
   'annotation': 'Annotation.A.IT.Support'
+  doc3 =
+  'id': 3
+  'title': 'A15'
+  'body': 'Sociology classroom'
+  'annotation': 'Annotation.A.A15'
 
   index.addDoc doc1
   index.addDoc doc2
+  index.addDoc doc3
 
 search = (text) ->
   console.log("search for: " + text)
@@ -102,6 +108,22 @@ search = (text) ->
     title: boost: 2
     body: boost: 1
   console.log(results)
+
+  output = ''
+
+  if results.length == 0
+    $('#context_sensitive_overlay').replaceWith '<div id="context_sensitive_overlay"><p>'
+    + 'No results' + '</p></div>'
+
+  for result in results
+    output += '<b>' + result.doc.title + '</b>' + '<br/>'
+    output += result.doc.body + '<br/>'
+    output += result.doc.annotation + '<br/>'
+    output += '<br/>'
+
+  if output != undefined
+    $('#context_sensitive_overlay').replaceWith '<div id="context_sensitive_overlay"><p>' +
+    output + '</p></div>'
 
 change_floor = (direction) ->
   console.log("Current floor: "  + current_floor.toString())
